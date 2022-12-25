@@ -98,21 +98,10 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         if(A == null) return B;
 
-        IntList head1 = new IntList(A.first, A.rest);
-        IntList curr1 = head1;
-        while(curr1.rest != null){
-            curr1.rest = new IntList(curr1.rest.first, curr1.rest.rest);
-            curr1 = curr1.rest;
-        }
+        if(A.rest == null)
+            return new IntList(A.first, B);
 
-        IntList head2 = new IntList(B.first, B.rest);
-        IntList curr2 = head2;
-        while(curr2.rest != null){
-            curr2.rest = new IntList(curr2.rest.first,curr2.rest.rest);
-            curr2 = curr2.rest;
-        }
-        curr1.rest = head2;
-        return head1;
+        return new IntList(A.first, catenate(A.rest,B));
     }
 
 
